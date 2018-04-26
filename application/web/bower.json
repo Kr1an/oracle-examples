@@ -1,0 +1,17 @@
+{
+  "name": "super-cities-cqn-demo",
+  "version": "0.1.0",
+  "authors": [
+    "Dan McGhan"
+  ],
+  "description": "A simple, real-time data POC with Node.js, Socket.IO, and Oracle Database",
+  "main": "server.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "socket.io-client": "~1.3.4",
+    "jquery": "~2.1.3",
+    "js-cookie": "^2.2.0"
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/socket.io-client/socket.io.js"></script>
+    <script src="/vendor/js-cookie/src/js.cookie.js"></script>
+
+</head>
+<body>
+  <form method="post" target="frame" class="name-form" action="/connect">
+      <input type="text" name="author" placeholder="enter name">
+      <input type="submit" value="change name">
+  </form>
+  <ul id="chat" class="chat">
+
+  </ul>
+  <form method="post" target="frame" class="send-message-form" action="/send-message">
+    <input type="text" name="message" placeholder="message...">
+    <input type="submit" onsubmit="change" value="send">
+  </form>
+  <iframe class="iframe-helper" name="frame"></iframe>
+
+  <script>
+    const socket = io();
+    const generateMsg = (msg) => `<li class="message"><span>${msg.author}:</span> ${msg.message}</li>`;
+    socket.on('connect', () => {
+      fetch('/db');
+    })
+    socket.on('refresh', (messages) => {
+      document.querySelector('#chat').innerHTML = messages.map(generateMsg).join('');
+    });
+  </script>
+  <style>
+    .iframe-helper {
+      display: none;
+    }
+  </style>
+</body>
+</html>

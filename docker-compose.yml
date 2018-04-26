@@ -8,11 +8,18 @@ services:
       - '1521:1521'
     volumes:
       - './.data:/u01/app/oracle'
-    depends_on:
-      - sender
     links:
       - sender
+    depends_on:
+      - sender
+    networks:
+        - dockernet
   sender:
     build: './application/metrics-within/smtp-sender'
     ports:
       - '6001:80'
+    networks:
+        - dockernet
+networks:
+    dockernet:
+        external: true
